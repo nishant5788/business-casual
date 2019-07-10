@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { ProductListComponent } from './pages/products/product-list/product-list
 import { ProductSingleComponent } from './pages/products/product-single/product-single.component';
 import { SiteNavigationComponent } from './common/site-navigation/site-navigation.component';
 import { ProductService } from './pages/products/product.service';
+import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,12 @@ import { ProductService } from './pages/products/product.service';
     ProductListComponent,
     ProductSingleComponent,
     SiteNavigationComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [ProductService],

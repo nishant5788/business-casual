@@ -1,7 +1,10 @@
 import { Product } from './product.model';
+import { Subject } from 'rxjs';
 
 
 export class ProductService {
+
+     ProductChanged = new Subject<Product[]>();
 
 private products: Product[] = [
    new Product(
@@ -33,6 +36,12 @@ private products: Product[] = [
 
 getProducts() {
     return this.products.slice();
+}
+
+
+addProduct(product: Product) {
+this.products.push(product);
+this.ProductChanged.next(this.products.slice());
 }
 
 
