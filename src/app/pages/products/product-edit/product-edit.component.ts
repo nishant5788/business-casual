@@ -24,7 +24,9 @@ export class ProductEditComponent implements OnInit {
 
   ngOnInit() {
 
+    
     this.initForm();
+    console.log(this.getControls());
 
   }
 
@@ -42,13 +44,12 @@ export class ProductEditComponent implements OnInit {
       'imagePath': new FormControl(productImagePath, Validators.required),
       'description': new FormControl(productDescription, Validators.required),
       'tags': productTags
-
     });
 
   }
 
   getControls() {
-    return (<FormArray>this.productForm.get('tags')).controls;
+   return (<FormArray>this.productForm.get('tags')).controls;
   }
 
   onSubmit() {
@@ -57,6 +58,14 @@ export class ProductEditComponent implements OnInit {
     this.productService.addProduct(newProduct);
 
     this.onCancel();
+  }
+
+  addTags() {
+    (<FormArray>this.productForm.get('tags')).push(
+      new FormGroup({
+        'tagName': new FormControl(null, Validators.required)
+      })
+    )
   }
 
   onCancel() {

@@ -43,12 +43,11 @@
     formControlName="description"
     ></textarea>
     </div>
-    <div class="form-group" formArrayName="tags">
-      <div 
+    <div class="form-group">
+      <div formArrayName="tags">
+      <div class="row" 
       *ngFor="let tagCtrl of getControls(); let i = index"
-      [formGroupName]="i"
-      >
-      <div class="row">
+      [formGroupName]="i">
       <div class="col-9">
           <input 
           type="text" 
@@ -63,7 +62,11 @@
     </div>
       </div>
       <hr>
-      <button type="button" class="btn btn-secondary">Add Tags</button>
+      <button 
+      type="button" 
+      class="btn btn-secondary"
+      (click)="addTags()"
+      >Add Tags</button>
     
     </div>
     

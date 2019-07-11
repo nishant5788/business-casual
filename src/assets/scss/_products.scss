@@ -19,4 +19,13 @@
       max-width: 50vw;
     }
   }
+
+  .product-edit {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 18px;
+    color: $secondary;
+  }
+
 }
