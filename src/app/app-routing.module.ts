@@ -6,7 +6,7 @@ import { StoreComponent } from './pages/store/store.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { ProductEditComponent } from './pages/products/product-edit/product-edit.component';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},

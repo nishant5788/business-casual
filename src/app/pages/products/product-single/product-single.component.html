@@ -5,7 +5,7 @@
       <div class="product-item-title d-flex">
         <div class="bg-faded p-5 d-flex ml-auto rounded">
           <h2 class="section-heading mb-0">
-              <i class="fa fa-pen product-edit"></i>
+              <i class="fa fa-pen product-edit" (click)="onEditProduct()"></i>
             <span class="section-heading-upper">
             <span *ngFor="let tag of product.tags" class="single-tag">{{tag}}</span>
           </span>

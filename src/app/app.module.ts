@@ -17,7 +17,7 @@ import { ProductListComponent } from './pages/products/product-list/product-list
 import { ProductSingleComponent } from './pages/products/product-single/product-single.component';
 import { SiteNavigationComponent } from './common/site-navigation/site-navigation.component';
 import { ProductService } from './pages/products/product.service';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
+import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +31,10 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
     StoreComponent,
     ProductsComponent,
     ProductEditComponent,
+    ProductDetailComponent,
     ProductListComponent,
     ProductSingleComponent,
     SiteNavigationComponent,
-    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

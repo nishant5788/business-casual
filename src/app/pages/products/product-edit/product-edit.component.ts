@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
 
@@ -24,10 +24,16 @@ export class ProductEditComponent implements OnInit {
 
   ngOnInit() {
 
+    this.route.params.
+    subscribe(
+      (params: Params)=> {
+        this.id = +params['id']
+        this.editMode = params['id'] != null;
+        this.initForm();
+      }
+    )
     
-    this.initForm();
-    console.log(this.getControls());
-
+    
   }
 
 
@@ -38,6 +44,19 @@ export class ProductEditComponent implements OnInit {
     let productImagePath = '';
     let productDescription = '';
     let productTags = new FormArray([]);
+
+    if(this.editMode) {
+    const product = this.productService.getProduct(this.id);
+
+    productName = product.name;
+    productImagePath = product.imagePath;
+    productDescription = product.description;
+
+    for(let tag of product.tags) {
+      productTags.push(new FormControl(tag))
+    }
+
+    }
 
     this.productForm = new FormGroup({
       'name': new FormControl(productName, Validators.required),
@@ -55,21 +74,29 @@ export class ProductEditComponent implements OnInit {
   onSubmit() {
     const newProduct = this.productForm.value;
 
+    if(this.editMode) {
+      this.productService.updateProduct(this.id, newProduct);
+    }
+
     this.productService.addProduct(newProduct);
 
     this.onCancel();
   }
 
   addTags() {
-    (<FormArray>this.productForm.get('tags')).push(
-      new FormGroup({
-        'tagName': new FormControl(null, Validators.required)
-      })
-    )
+    const formTag = new FormControl(null, Validators.required);
+
+    (<FormArray>this.productForm.get('tags')).push(formTag);
   }
 
   onCancel() {
-    this.router.navigate(['../'], {relativeTo: this.route});
+    this.router.navigate(['/products']);
   }
+
+  onDeleteTag(index: number) {
+    (<FormArray>this.productForm.get('tags')).removeAt(index);
+  }
+
+  
 
 }

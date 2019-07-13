@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class ProductListComponent implements OnInit, OnDestroy {
 
   products: Product[];
-  subscription: Subscription
+  subscription: Subscription;
 
   constructor(private productService: ProductService) { }
 

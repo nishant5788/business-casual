@@ -38,11 +38,22 @@ getProducts() {
     return this.products.slice();
 }
 
+getProduct(index: number) {
+return this.products[index];
+}
+
+
+updateProduct(index: number, newProduct: Product) {
+this.products[index] = newProduct;
+this.ProductChanged.next(this.products.slice());
+}
+
 
 addProduct(product: Product) {
 this.products.push(product);
 this.ProductChanged.next(this.products.slice());
 }
+
 
 
 }

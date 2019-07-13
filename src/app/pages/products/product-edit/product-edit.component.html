@@ -5,7 +5,8 @@
        type="submit" 
        class="btn btn-primary full-width"
        [disabled] = "!productForm.valid"
-       >Save</button>
+       >{{ editMode ? "Edit" : "Add"}}</button>
+       
       </div>
       <div class="col-6 text-right">
           <button 
@@ -47,17 +48,21 @@
       <div formArrayName="tags">
       <div class="row" 
       *ngFor="let tagCtrl of getControls(); let i = index"
-      [formGroupName]="i">
+      >
       <div class="col-9">
           <input 
           type="text" 
-          class="form-control" 
+          class="form-control mb-10" 
           placeholder="Enter Tags"
-          formControlName="tagName"
+          [formControlName]="i"
           />
       </div>
       <div class="col-3">
-      <button type="button" class="btn btn-danger">X</button>
+      <button 
+      type="button" 
+      class="btn btn-danger"
+      (click)="onDeleteTag(i)"
+      >X</button>
       </div>
     </div>
       </div>
