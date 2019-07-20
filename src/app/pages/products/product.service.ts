@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 export class ProductService {
 
-     ProductChanged = new Subject<Product[]>();
+ProductChanged = new Subject<Product[]>();
 
 private products: Product[] = [
    new Product(
@@ -52,6 +52,11 @@ this.ProductChanged.next(this.products.slice());
 addProduct(product: Product) {
 this.products.push(product);
 this.ProductChanged.next(this.products.slice());
+}
+
+deleteProduct(index: number) {
+     this.products.splice(index,1);
+     this.ProductChanged.next(this.products.slice());
 }
 
 

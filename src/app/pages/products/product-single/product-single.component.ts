@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product.model';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-single',
@@ -14,7 +15,8 @@ export class ProductSingleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
     ) { }
 
   ngOnInit() {
@@ -29,6 +31,10 @@ export class ProductSingleComponent implements OnInit {
       behavior: 'smooth'
     });
 
+  }
+
+  onDeleteProduct(){
+    this.productService.deleteProduct(this.id);
   }
 
 }

@@ -20,13 +20,22 @@
     }
   }
 
-  .product-edit {
+  .product-item-toolbar {
     position: absolute;
     right: 15px;
     top: 15px;
     font-size: 18px;
     cursor: pointer;
     color: $secondary;
+    .toolbar-icon {
+      margin-left: 15px;
+      &:hover {
+        color: $primary;
+      }
+      &:first-child {
+        margin-left: 0;
+      }
+    }
   }
 
 }

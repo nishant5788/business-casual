@@ -18,6 +18,10 @@ import { ProductSingleComponent } from './pages/products/product-single/product-
 import { SiteNavigationComponent } from './common/site-navigation/site-navigation.component';
 import { ProductService } from './pages/products/product.service';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
+import { ShortenPipe } from './common/shorten.pipe';
+import { ProductFilter } from './pages/products/product-filter.pipe';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -35,12 +39,15 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
     ProductListComponent,
     ProductSingleComponent,
     SiteNavigationComponent,
+    ShortenPipe,
+    ProductFilter
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
