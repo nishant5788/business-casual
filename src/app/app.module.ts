@@ -21,6 +21,7 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
 import { ShortenPipe } from './common/shorten.pipe';
 import { ProductFilter } from './pages/products/product-filter.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './common/modal/modal.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ProductSingleComponent,
     SiteNavigationComponent,
     ShortenPipe,
-    ProductFilter
+    ProductFilter,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     AppRoutingModule,
     NgbModule
+  ],
+  entryComponents: [
+    ModalComponent
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

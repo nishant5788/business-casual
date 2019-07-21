@@ -7,7 +7,8 @@
           <h2 class="section-heading mb-0">
             <div class="product-item-toolbar">
               <i class="fa fa-pen product-edit toolbar-icon" (click)="onEditProduct()"></i>
-              <i class="fa fa-trash product-delete toolbar-icon" (click)="onDeleteProduct()"></i>
+              <!-- <i class="fa fa-trash product-delete toolbar-icon" (click)="onDeleteProduct()"></i> -->
+              <i class="fa fa-trash product-delete toolbar-icon" (click)="openDeleteModal()"></i>
             </div>
             <span class="section-heading-upper">
             <span *ngFor="let tag of product.tags" class="single-tag">{{tag}}</span>

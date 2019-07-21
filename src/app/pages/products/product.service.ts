@@ -33,6 +33,17 @@ private products: Product[] = [
 
 ];
 
+getproductImages() {
+     const product = this.products;
+     const productImages = [];
+     const totalImages = product.length;
+     for(let i = 0; i < totalImages; i++) {
+          productImages.push(product[i].imagePath)
+     }
+
+     return productImages;
+}
+
 
 getProducts() {
     return this.products.slice();
@@ -55,11 +66,9 @@ this.ProductChanged.next(this.products.slice());
 }
 
 deleteProduct(index: number) {
-     this.products.splice(index,1);
+     this.products.splice(index, 1);
      this.ProductChanged.next(this.products.slice());
 }
-
-
 
 }
 

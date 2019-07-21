@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../product.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from 'src/app/common/modal/modal.component';
 
 @Component({
   selector: 'app-product-single',
@@ -16,10 +18,17 @@ export class ProductSingleComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private modalService: NgbModal
     ) { }
 
   ngOnInit() {
+  }
+
+  openDeleteModal() {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.modalTitle = 'Are you sure you want to Delete?';
+    modalRef.componentInstance.modalID = this.id;
   }
 
 
