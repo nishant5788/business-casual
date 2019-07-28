@@ -81,6 +81,7 @@ export class ProductEditComponent implements OnInit {
     this.productService.addProduct(newProduct);
 
     this.onCancel();
+    this.productService.storeProducts();
   }
 
   addTags() {

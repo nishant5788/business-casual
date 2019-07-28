@@ -23,7 +23,7 @@ export class ModalComponent implements OnInit {
 
   onDeleteProduct() {
     this.productService.deleteProduct(this.modalID);
- 
+    this.productService.storeProducts();
   }
 
 }

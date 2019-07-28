@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,7 +22,6 @@ import { ProductService } from './pages/products/product.service';
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { ShortenPipe } from './common/shorten.pipe';
 import { ProductFilter } from './pages/products/product-filter.pipe';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './common/modal/modal.component';
 
 
@@ -49,7 +50,8 @@ import { ModalComponent } from './common/modal/modal.component';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
   entryComponents: [
     ModalComponent

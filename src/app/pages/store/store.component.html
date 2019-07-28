@@ -10,7 +10,8 @@
           <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
             <li 
             class="list-unstyled-item list-hours-item d-flex"
-            *ngFor="let storeItem of storeTime">
+            [ngClass]="addToday(i)"
+            *ngFor="let storeItem of storeTime; let i = index">
                 {{storeItem.day}}
               <span class="ml-auto">{{storeItem.time}}</span>
             </li>

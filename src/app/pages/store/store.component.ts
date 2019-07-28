@@ -19,7 +19,15 @@ export class StoreComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  addToday(index: number) {
+    const today = new Date().getDay();
+    if (index === today) {
+      return 'today';
+    } else {
+      return false;
+    }
   }
 
 }

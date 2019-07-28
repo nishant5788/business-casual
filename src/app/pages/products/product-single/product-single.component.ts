@@ -42,8 +42,8 @@ export class ProductSingleComponent implements OnInit {
 
   }
 
-  onDeleteProduct(){
-    this.productService.deleteProduct(this.id);
-  }
+  // onDeleteProduct(){
+  //   this.productService.deleteProduct(this.id);
+  // }
 
 }
