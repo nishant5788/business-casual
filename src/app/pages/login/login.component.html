@@ -1,0 +1,29 @@
+<section class="page-section login-section">
+    <div class="container">
+      <div class="mt-30">
+        <div class="row">
+          <div class="col-xl-7 col-lg-10 mx-auto">
+            <div class="bg-faded rounded p-5">
+              <h2 class="section-heading mb-4">
+                <span class="section-heading-upper">Login Now</span>
+                <span class="section-heading-lower">Enter your Details</span>
+                <small class="section-heading-small">username: angular@n4nish.com &nbsp;&nbsp;&nbsp;&nbsp; password: angular@12#</small>
+              </h2>
+              <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+              <form class="form" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+              <div class="form-group">
+              <input name="email" type="email" class="form-control" value="angular@n4nish.com" placeholder="Email" ngModel email required />
+              </div>
+              <div class="form-group">
+                <input name="password" type="password" class="form-control" value="angular@12#" placeholder="Password" ngModel required />
+                </div>
+                <div class="form-group">
+                  <input [disabled]="!loginForm.valid" type="submit" class="btn btn-primary" value="Login" />
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

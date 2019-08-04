@@ -23,6 +23,8 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
 import { ShortenPipe } from './common/shorten.pipe';
 import { ProductFilter } from './pages/products/product-filter.pipe';
 import { ModalComponent } from './common/modal/modal.component';
+import { LoginComponent } from './pages/login/login.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { ModalComponent } from './common/modal/modal.component';
     SiteNavigationComponent,
     ShortenPipe,
     ProductFilter,
-    ModalComponent
+    ModalComponent,
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

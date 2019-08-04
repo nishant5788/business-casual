@@ -5,9 +5,8 @@
       <div class="product-item-title d-flex">
         <div class="bg-faded p-5 d-flex ml-auto rounded">
           <h2 class="section-heading mb-0">
-            <div class="product-item-toolbar">
+            <div class="product-item-toolbar" *ngIf="isAuthenticated">
               <i class="fa fa-pen product-edit toolbar-icon" (click)="onEditProduct()"></i>
-              <!-- <i class="fa fa-trash product-delete toolbar-icon" (click)="onDeleteProduct()"></i> -->
               <i class="fa fa-trash product-delete toolbar-icon" (click)="openDeleteModal()"></i>
             </div>
             <span class="section-heading-upper">

@@ -13,6 +13,12 @@
 .btn-primary {
   background-color: $primary;
   border-color: $primary;
+  &:disabled {
+    background-color: $primary;
+    border-color: $primary;
+    opacity: 0.7; 
+    cursor: not-allowed;
+  }
   &:hover,
   &:focus,
   &:active {
