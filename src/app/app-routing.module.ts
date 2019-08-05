@@ -9,6 +9,7 @@ import { ProductEditComponent } from './pages/products/product-edit/product-edit
 import { ProductDetailComponent } from './pages/products/product-detail/product-detail.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './pages/login/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,7 +21,7 @@ const routes: Routes = [
   ]},
   {path: 'store', component: StoreComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   { path: 'not-found', component: PageNotFoundComponent },
     { path: '**', redirectTo: '/not-found' }
 ];
