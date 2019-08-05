@@ -24,14 +24,14 @@
       <div class="col-xl-9 mx-auto">
         <div class="cta-inner text-center rounded">
             <ngb-carousel>
-                <ng-template ngbSlide *ngFor = "let imagePath of sliderImages">
+                <ng-template ngbSlide *ngFor = "let product of products">
                     <div class="picsum-img-wrapper">
-                        <img src="{{imagePath}}" alt="Random first slide">
+                        <img src="{{product.imagePath}}" alt="{{product.name}}" />
                       </div>
-                      <!-- <div class="carousel-caption">
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                      </div> -->
+                      <div class="carousel-caption">
+                        <h3>{{product.name}}</h3>
+                        <p>{{product.description}}</p>
+                      </div>
                 </ng-template>
               </ngb-carousel>
         </div>

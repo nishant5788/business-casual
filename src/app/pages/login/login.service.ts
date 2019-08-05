@@ -71,8 +71,6 @@ export class loginService {
           _token: string;
           _tokenExpirationDate: string;
         } = JSON.parse(localStorage.getItem('userData'));
-
-        console.log("userData from Autologin is" +userData);
         
         if (!userData) {
           return;
