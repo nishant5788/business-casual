@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../products/product.service';
 import { Product } from '../products/product.model';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,21 +11,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  products = {};
+  products = [];
 
   constructor(private productService: ProductService,
     private http: HttpClient
     ) { }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
-
-    this.http.get('https://businesscasual-2d842.firebaseio.com/products.json')
-    .subscribe(
-      responseData => {
-       this.products = responseData;
-      }
-    );
+    this.productService.fetchProducts().subscribe(
+        responseData => {
+         this.products = responseData;
+        }
+      );
   }
 
 }

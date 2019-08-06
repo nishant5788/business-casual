@@ -18,10 +18,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscription = this.productService.ProductChanged.subscribe(
       (newProduct: Product[]) => {
-        this.products = newProduct
+        this.products = newProduct;
+        console.log(this.products);
       }
     );
     this.products = this.productService.getProducts();
+
   }
 
   ngOnDestroy() {

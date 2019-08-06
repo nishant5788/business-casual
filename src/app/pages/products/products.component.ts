@@ -16,7 +16,7 @@ export class ProductsComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.productService.fetchProducts();
+    this.productService.fetchedProducts();
   }
 
   onAddNewProduct() {
