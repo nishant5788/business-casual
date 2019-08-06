@@ -6,6 +6,7 @@
           class="btn btn-primary add-product-btn"
           type="button"
           (click)="onAddNewProduct()"
+          *ngIf="isAuthenticated"
           >Add New Product</button>
       </div>
       <div class="col-6">
@@ -16,4 +17,4 @@
     </div>
     </div>
 
-    <app-product-list></app-product-list>
+    <app-product-list [authStatusFromProduct]="isAuthenticated"></app-product-list>

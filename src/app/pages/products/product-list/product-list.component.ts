@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Product } from '../product.model';
 import { ProductService } from '../product.service';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   products: Product[];
   subscription: Subscription;
+  @Input() authStatusFromProduct: boolean;
 
   constructor(private productService: ProductService) { }
 
