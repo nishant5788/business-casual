@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { DashboardService } from './dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
+    const test = this.dashboardService.pages.footer;
+    console.log("Footer text from dashboard component is " + test);
+  }
+
+
+  onEditFooter(form: NgForm) {
+    const value = form.value.editfooter;
+    this.dashboardService.updateFooter(value);
+    this.dashboardService.storePages();
   }
 
 }

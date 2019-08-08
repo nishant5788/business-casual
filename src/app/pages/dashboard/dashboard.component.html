@@ -1,7 +1,6 @@
-<section class="page-section about-heading">
+<section class="page-section">
     <div class="container">
-      <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="assets/img/about.jpg" alt="Image" />
-      <div class="about-heading-content">
+      <div class="mt-30">
         <div class="row">
           <div class="col-xl-9 col-lg-10 mx-auto">
             <div class="bg-faded rounded p-5">
@@ -10,21 +9,47 @@
                 <span class="section-heading-lower">Edit Fields Below</span>
               </h2>
               
-              <!-- Nav tabs -->
-  <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link">Header</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link">Footer</a>
-    </li>
-  </ul>
-  
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div class="tab-pane container active">
-    </div>
-  </div>
+              <!-- Tabs -->
+              <ngb-tabset type="pills">
+
+                <!-- Header Tab -->
+                  <ngb-tab title="Header">
+                    <ng-template ngbTabContent>
+                      <p>Header Text</p>
+                    </ng-template>
+                  </ngb-tab>
+                  <!-- Header Tab -->
+
+
+                  <!-- Footer Tab -->
+                  <ngb-tab title="Footer">
+                      <ng-template ngbTabContent>
+                          <form class="form mt-40" (ngSubmit)="onEditFooter(editFooter)" #editFooter="ngForm">
+                              <div class="form-group">
+                              <label for="editfooter">Enter Text</label>
+                              <textarea 
+                              name="editfooter" 
+                              id="editfooter" 
+                              class="form-control"
+                              ngModel
+                              required
+                              ></textarea>
+                              </div>
+                              <div class="form-group">
+                              <button 
+                              type="submit"
+                              class="btn btn-secondary"
+                              [disabled]="!editFooter.valid"
+                              >Save</button>
+                              </div>
+                              </form>
+                      </ng-template>
+                    </ngb-tab>
+                    <!-- Footer Tab -->
+
+
+                </ngb-tabset>
+              <!-- Tabs -->
   
   
             </div>

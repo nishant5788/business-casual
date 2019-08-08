@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { loginService } from './pages/login/login.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { loginService } from './pages/login/login.service';
 })
 export class AppComponent implements OnInit {
   title = 'Business Casual';
+  isLoading = true;
 
 
   constructor(private loginService: loginService){}

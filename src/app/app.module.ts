@@ -25,6 +25,7 @@ import { ProductFilter } from './pages/products/product-filter.pipe';
 import { ModalComponent } from './common/modal/modal.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoaderComponent } from './common/loader/loader.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     ModalComponent,
     LoginComponent,
     DashboardComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
