@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    this.productService.fetchedProducts();
+    this.productService.fetchProducts().subscribe();
     this.userSubscription = this.loginService.user
       .subscribe(
         user => {

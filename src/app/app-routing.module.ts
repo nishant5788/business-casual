@@ -10,14 +10,15 @@ import { ProductDetailComponent } from './pages/products/product-detail/product-
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './pages/login/auth.guard';
+import { ProductsResolverService } from './pages/products/products-resolver.service';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'products', component: ProductsComponent, children: [
     {path: 'new', component: ProductEditComponent},
-    {path: ':id', component: ProductDetailComponent},
-    {path: ':id/edit', component: ProductEditComponent}
+    {path: ':id', component: ProductDetailComponent, resolve: [ProductsResolverService]},
+    {path: ':id/edit', component: ProductEditComponent, resolve: [ProductsResolverService]}
   ]},
   {path: 'store', component: StoreComponent},
   {path: 'login', component: LoginComponent},

@@ -3,6 +3,7 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../product.model';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-product-edit',
@@ -22,8 +23,21 @@ export class ProductEditComponent implements OnInit {
     private productService: ProductService
     ) { }
 
-  ngOnInit() {
 
+    onSubmit() {
+      const newProduct = this.productForm.value;
+  
+      if(this.editMode) {
+        this.productService.updateProduct(this.id, newProduct);
+      }
+      else {
+      this.productService.addProduct(newProduct);
+    }
+      this.onCancel();
+      this.productService.storeProducts();
+    }
+
+  ngOnInit() {
     this.route.params.
     subscribe(
       (params: Params)=> {
@@ -31,12 +45,8 @@ export class ProductEditComponent implements OnInit {
         this.editMode = params['id'] != null;
         this.initForm();
       }
-    )
-    
-    
+    )    
   }
-
-
 
   private initForm() {
 
@@ -69,19 +79,6 @@ export class ProductEditComponent implements OnInit {
 
   getControls() {
    return (<FormArray>this.productForm.get('tags')).controls;
-  }
-
-  onSubmit() {
-    const newProduct = this.productForm.value;
-
-    if(this.editMode) {
-      this.productService.updateProduct(this.id, newProduct);
-    }
-
-    this.productService.addProduct(newProduct);
-
-    this.onCancel();
-    this.productService.storeProducts();
   }
 
   addTags() {
