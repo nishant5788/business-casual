@@ -16,9 +16,9 @@ const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'products', component: ProductsComponent, children: [
-    {path: 'new', component: ProductEditComponent},
-    {path: ':id', component: ProductDetailComponent, resolve: [ProductsResolverService]},
-    {path: ':id/edit', component: ProductEditComponent, resolve: [ProductsResolverService]}
+    {path: 'new', component: ProductEditComponent, canActivate: [AuthGuard]},
+    {path: ':id', component: ProductDetailComponent, resolve: [ProductsResolverService], canActivate: [AuthGuard]},
+    {path: ':id/edit', component: ProductEditComponent, resolve: [ProductsResolverService], canActivate: [AuthGuard]}
   ]},
   {path: 'store', component: StoreComponent},
   {path: 'login', component: LoginComponent},

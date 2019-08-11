@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from './product.service';
 import { Subscription } from 'rxjs';
 import { loginService } from '../login/login.service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -12,6 +13,7 @@ import { loginService } from '../login/login.service';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
+  isLoading = true;
   private userSubscription: Subscription;
 
   constructor(
@@ -22,7 +24,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit() {
-    this.productService.fetchProducts().subscribe();
+    this.productService.fetchProducts().subscribe(
+      resData => {
+        this.isLoading = false;
+      }
+    );
     this.userSubscription = this.loginService.user
       .subscribe(
         user => {
