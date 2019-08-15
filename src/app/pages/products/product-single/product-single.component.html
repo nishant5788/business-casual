@@ -10,7 +10,7 @@
               <i class="fa fa-trash product-delete toolbar-icon" (click)="openDeleteModal()"></i>
             </div>
             <span class="section-heading-upper">
-            <span *ngFor="let tag of product.tags" class="single-tag">{{tag}}</span>
+            <span *ngFor="let tag of product.tags" class="single-tag">{{tag}} </span>
           </span>
             <span class="section-heading-lower" placement="top" ngbTooltip="{{product.name}}">{{product.name | shorten: 20}}</span>
           </h2>

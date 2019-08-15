@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
   isLoading = true;
+  error = null;
   private userSubscription: Subscription;
 
   constructor(
@@ -26,6 +27,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.productService.fetchProducts().subscribe(
       resData => {
+        this.isLoading = false;
+      },
+      errorMsg => {
+        this.error = errorMsg.statusText;
         this.isLoading = false;
       }
     );
