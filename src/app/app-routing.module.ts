@@ -13,17 +13,17 @@ import { AuthGuard } from './pages/login/auth.guard';
 import { ProductsResolverService } from './pages/products/products-resolver.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'about', component: AboutComponent},
-  {path: 'products', component: ProductsComponent, children: [
+  {path: '', component: HomeComponent, data: { title: 'Welcome to Business Casual' }},
+  {path: 'about', component: AboutComponent, data: { title: 'About us | Business Casual' } },
+  {path: 'products', component: ProductsComponent, data: { title: 'Products | Business Casual' }, children: [
     {path: 'new', component: ProductEditComponent, canActivate: [AuthGuard]},
     {path: ':id', component: ProductDetailComponent, resolve: [ProductsResolverService], canActivate: [AuthGuard]},
     {path: ':id/edit', component: ProductEditComponent, resolve: [ProductsResolverService], canActivate: [AuthGuard]}
   ]},
-  {path: 'store', component: StoreComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-  { path: 'not-found', component: PageNotFoundComponent },
+  {path: 'store', component: StoreComponent, data: { title: 'Store | Business Casual' }},
+  {path: 'login', component: LoginComponent, data: { title: 'Login | Business Casual' }},
+  {path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard | Business Casual' }, canActivate: [AuthGuard]},
+  { path: 'not-found', component: PageNotFoundComponent, data: { title: 'Page Not Found | Business Casual' } },
     { path: '**', redirectTo: '/not-found' }
 ];
 
