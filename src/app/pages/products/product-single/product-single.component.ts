@@ -3,7 +3,6 @@ import { Product } from '../product.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/common/modal/modal.component';
-import { loginService } from '../../login/login.service';
 
 @Component({
   selector: 'app-product-single',
@@ -21,7 +20,6 @@ export class ProductSingleComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal,
-    private loginService: loginService
     ) { }
 
     ngOnInit() {

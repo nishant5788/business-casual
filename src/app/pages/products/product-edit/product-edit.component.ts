@@ -26,6 +26,8 @@ export class ProductEditComponent implements OnInit {
 
     onSubmit() {
       const newProduct = this.productForm.value;
+
+      console.log("newProduct is " + JSON.stringify(newProduct));
   
       if(this.editMode) {
         this.productService.updateProduct(this.id, newProduct);
@@ -55,6 +57,16 @@ export class ProductEditComponent implements OnInit {
     let productDescription = '';
     let productTags = new FormArray([]);
 
+    // let dateObj = new Date();
+    // let month= dateObj.getMonth();
+    // let year = dateObj.getFullYear(); 
+    // let day = dateObj.getDate();
+    // let hours = dateObj.getHours()
+    // let minutes = dateObj.getMinutes();
+    // let seconds= dateObj.getSeconds();
+    // let productDate = `${day}-${month}-${year}-${hours}-${minutes}-${seconds}`;
+    let productDate = new Date();
+
     if(this.editMode) {
     const product = this.productService.getProduct(this.id);
 
@@ -72,6 +84,7 @@ export class ProductEditComponent implements OnInit {
       'name': new FormControl(productName, Validators.required),
       'imagePath': new FormControl(productImagePath, Validators.required),
       'description': new FormControl(productDescription, Validators.required),
+      'date': new FormControl(productDate),
       'tags': productTags
     });
 

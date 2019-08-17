@@ -1,35 +1,6 @@
-<div class="container" *ngIf="!authStatusFromProduct">
-    <div class="row">
-    <div class="col-12">
-    <ngb-pagination
-      [(page)]="page"
-      [pageSize]="pageSize"
-      [collectionSize]="collectionSize"
-      class="products-pagination"
-      (pageChange)="onPaginate()"
-      ></ngb-pagination>
-    </div>
-    </div>
-    </div>
-
 <app-product-single
 *ngFor="let product of products; let i = index"
 [productSingle]="product"
 [productSingleID]="i"
 [productSingleAuthStatus]="authStatusFromProduct"
 ></app-product-single>
-
-
-<div class="container" *ngIf="!authStatusFromProduct">
-    <div class="row">
-    <div class="col-12">
-    <ngb-pagination
-      [(page)]="page"
-      [pageSize]="pageSize"
-      [collectionSize]="collectionSize"
-      class="products-pagination"
-      (pageChange)="onPaginate()"
-      ></ngb-pagination>
-    </div>
-    </div>
-    </div>
