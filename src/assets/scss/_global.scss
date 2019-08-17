@@ -88,3 +88,20 @@ p {
 .modal-header .close {
   outline: none !important;
 }
+
+.page-item {
+
+&.active {
+  .page-link {
+    background-color: $primary;
+    border-color: $primary;
+  }
+}
+  .page-link {
+    color: $primary;
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.55);
+    }
+  }
+
+}
