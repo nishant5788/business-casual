@@ -13,7 +13,7 @@ import { Product } from './product.model';
 export class ProductsComponent implements OnInit, OnDestroy {
 
   isAuthenticated = false;
-  isLoading = false;
+  isLoading = true;
   error = null;
   products: Product[];
   private userSubscription: Subscription;
@@ -40,6 +40,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     //     this.isLoading = false;
     //   }
     // );
+
     this.userSubscription = this.loginService.user
       .subscribe(
         user => {
@@ -53,6 +54,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         else {
         this.productService.fetchProducts().subscribe(
           res => {
+            this.isLoading = false;
             this.products = res;
           }
         );
@@ -71,30 +73,43 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
     this.subscription = this.productService.fetchProducts().subscribe(
       (newProduct: Product[]) => {
-        this.collectionSize = newProduct.length;
+        this.isLoading = false;
+        this.collectionSize = newProduct.length + 1;
         const productSet = newProduct.slice(newPage, newPageSize);
         this.products = productSet;
+        console.log("newPageSize is " + newPageSize);
+        console.log("newPage is " + newPage);
+        console.log("collectionSize is " + this.collectionSize);
       }
     );
 
-    window.scrollTo({
-      top: 150,
-      left: 100,
-      behavior: 'smooth'
-    });
+    // window.scrollTo({
+    //   top: 150,
+    //   left: 100,
+    //   behavior: 'smooth'
+    // });
     
   }
 
-  productSort(value:string) {
-    console.log(value);
-  }
+  productSort(sortValue: string) {
+    if(sortValue === 'mostRecent') {
+    this.products.sort(function(a,b): any {
+      let bDate: any = new Date(b.date);
+      let aDate: any = new Date(a.date);
+      let sortedOutput: any = bDate - aDate
+      return sortedOutput;
+    });
+    }
 
-  sortByDate() {
-    // this.products.sort(function(a,b){
-    //   let bDate: Date = new Date(b.date);
-    //   let aDate: Date = new Date(a.date);
-    //   return bDate - aDate;
-    // });
+    // if(sortValue === 'productName') {
+    //   this.products.sort(function(a,b): any {
+    //     let bDate: any = b.name;
+    //     let aDate: any = a.name;
+    //     let sortedOutput: any =  bDate - aDate;
+    //     console.log(aDate);
+    //     return sortedOutput;
+    //   });
+    //   }
   }
 
   availableProducts() {

@@ -6,3 +6,26 @@
   padding-left: 2rem;
   padding-right: 2rem;
 }
+
+.btn-primary {
+  &:active, &:focus {
+    background-color: $secondary !important;
+    border-color: $secondary !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+  }
+}
+
+
+.show {
+  .btn-primary {
+    &:active, &:focus {
+      background-color: $secondary !important;
+      border-color: $secondary !important;
+      box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+    }
+  }
+}
