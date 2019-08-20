@@ -19,7 +19,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   private userSubscription: Subscription;
   subscription: Subscription;
   page: any = 1;
-  pageSize: number = this.page + 3;
+  pageSize: number = 2;
   collectionSize: number;
 
   constructor(
@@ -66,10 +66,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   onPaginate() {
-    let newPageSize = this.page * 3;
-    let newPage = (this.page - 1) * 3;
-    if(newPage < 0) {
-      newPage = 0;
+    let lastProduct = this.page * this.pageSize;
+    let firstProduct = (this.page - 1) * this.pageSize;
+    if(firstProduct < 0) {
+      firstProduct = 0;
     }
 
     // if(this.page !== 1) {
@@ -83,20 +83,14 @@ export class ProductsComponent implements OnInit, OnDestroy {
       (newProduct: Product[]) => {
         this.isLoading = false;
         this.collectionSize = newProduct.length;
-        const productSet = newProduct.slice(newPage, newPageSize);
+        const productSet = newProduct.slice(firstProduct, lastProduct);
         this.products = productSet;
-        console.log("newPageSize is " + newPageSize);
-        console.log("newPage is " + newPage);
-        console.log("collectionSize is " + this.collectionSize);
+      },
+        errorMsg => {
+        this.error = errorMsg.statusText;
+        this.isLoading = false;
       }
     );
-
-    // window.scrollTo({
-    //   top: 150,
-    //   left: 100,
-    //   behavior: 'smooth'
-    // });
-    
   }
 
   productSort(sortValue: string) {
@@ -108,16 +102,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
       return sortedOutput;
     });
     }
-
-    // if(sortValue === 'productName') {
-    //   this.products.sort(function(a,b): any {
-    //     let bDate: any = b.name;
-    //     let aDate: any = a.name;
-    //     let sortedOutput: any =  bDate - aDate;
-    //     console.log(aDate);
-    //     return sortedOutput;
-    //   });
-    //   }
   }
 
   availableProducts() {
