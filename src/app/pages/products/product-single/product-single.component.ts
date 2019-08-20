@@ -13,8 +13,8 @@ export class ProductSingleComponent implements OnInit {
 
   @Input('productSingle') product: Product;
   @Input('productSingleID') id: number;
-
   @Input('productSingleAuthStatus') isAuthenticated: boolean;
+  productID: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +23,7 @@ export class ProductSingleComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
+      
     }
 
   openDeleteModal() {

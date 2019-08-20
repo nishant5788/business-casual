@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[];
   private userSubscription: Subscription;
   subscription: Subscription;
-  page: number = 1;
+  page: any = 1;
   pageSize: number = this.page + 3;
   collectionSize: number;
 
@@ -27,7 +27,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private productService: ProductService,
     private loginService: loginService
-    ) { }
+    ) { 
+      
+    }
+
+  
+    // ngAfterViewInit() {
+    //   let loadedProductsPage = this.route.snapshot.queryParamMap.get('page'); 
+    //   this.page = loadedProductsPage;
+    //   console.log("loadedProductsPage is " + loadedProductsPage);
+    // }
+    
 
   ngOnInit() {
     // this.productService.fetchProducts().subscribe(
@@ -48,17 +58,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }
       );
 
-      if(!this.isAuthenticated) {
-        this.onPaginate();
-        }
-        else {
-        this.productService.fetchProducts().subscribe(
-          res => {
-            this.isLoading = false;
-            this.products = res;
-          }
-        );
-      }
+      this.onPaginate();
   }
 
   onAddNewProduct() {
@@ -71,10 +71,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
     if(newPage < 0) {
       newPage = 0;
     }
+
+    // if(this.page !== 1) {
+    // this.router.navigate(['/products'], {queryParams: {page: this.page}});
+    // }
+    // else {
+    //   this.router.navigate(['/products'], {queryParams: {page: null}});
+    // }
+
     this.subscription = this.productService.fetchProducts().subscribe(
       (newProduct: Product[]) => {
         this.isLoading = false;
-        this.collectionSize = newProduct.length + 1;
+        this.collectionSize = newProduct.length;
         const productSet = newProduct.slice(newPage, newPageSize);
         this.products = productSet;
         console.log("newPageSize is " + newPageSize);

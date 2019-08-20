@@ -6,8 +6,8 @@
         <div class="bg-faded p-5 d-flex ml-auto rounded">
           <h2 class="section-heading mb-0">
             <div class="product-item-toolbar" *ngIf="isAuthenticated">
-              <i class="fa fa-pen product-edit toolbar-icon" (click)="onEditProduct()"></i>
-              <i class="fa fa-trash product-delete toolbar-icon" (click)="openDeleteModal()"></i>
+              <span class="fa fa-pen product-edit toolbar-icon" (click)="onEditProduct()"></span>
+              <span class="fa fa-trash product-delete toolbar-icon" (click)="openDeleteModal()"></span>
             </div>
             <span class="section-heading-upper">
             <span *ngFor="let tag of product.tags" class="single-tag">{{tag}} </span>

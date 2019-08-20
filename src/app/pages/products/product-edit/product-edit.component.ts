@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../product.service';
-import { Product } from '../product.model';
-import { debug } from 'util';
 
 @Component({
   selector: 'app-product-edit',
@@ -27,8 +25,6 @@ export class ProductEditComponent implements OnInit {
     onSubmit() {
       const newProduct = this.productForm.value;
 
-      console.log("newProduct is " + JSON.stringify(newProduct));
-  
       if(this.editMode) {
         this.productService.updateProduct(this.id, newProduct);
       }
@@ -56,15 +52,6 @@ export class ProductEditComponent implements OnInit {
     let productImagePath = '';
     let productDescription = '';
     let productTags = new FormArray([]);
-
-    // let dateObj = new Date();
-    // let month= dateObj.getMonth();
-    // let year = dateObj.getFullYear(); 
-    // let day = dateObj.getDate();
-    // let hours = dateObj.getHours()
-    // let minutes = dateObj.getMinutes();
-    // let seconds= dateObj.getSeconds();
-    // let productDate = `${day}-${month}-${year}-${hours}-${minutes}-${seconds}`;
     let productDate = new Date();
 
     if(this.editMode) {

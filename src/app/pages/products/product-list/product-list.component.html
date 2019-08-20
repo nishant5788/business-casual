@@ -1,6 +1,6 @@
 <app-product-single
 *ngFor="let product of products; let i = index"
 [productSingle]="product"
-[productSingleID]="i"
+[productSingleID]="product.id"
 [productSingleAuthStatus]="authStatusFromProduct"
 ></app-product-single>
