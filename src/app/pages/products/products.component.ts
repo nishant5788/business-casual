@@ -16,8 +16,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = true;
   error = null;
   products: Product[];
+  totalAvailableProducts: number = 0;
   private userSubscription: Subscription;
-  subscription: Subscription;
+  productFetchSubscription: Subscription;
+  productChangeSubscription: Subscription;
   page: any = 1;
   pageSize: number = 2;
   collectionSize: number;
@@ -40,17 +42,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
     
 
   ngOnInit() {
-    // this.productService.fetchProducts().subscribe(
-    //   resData => {
-    //     this.isLoading = false;
-    //     this.products = resData;
-    //   },
-    //   errorMsg => {
-    //     this.error = errorMsg.statusText;
-    //     this.isLoading = false;
-    //   }
-    // );
 
+    
     this.userSubscription = this.loginService.user
       .subscribe(
         user => {
@@ -79,18 +72,40 @@ export class ProductsComponent implements OnInit, OnDestroy {
     //   this.router.navigate(['/products'], {queryParams: {page: null}});
     // }
 
-    this.subscription = this.productService.fetchProducts().subscribe(
+    this.productFetchSubscription = this.productService.fetchProducts().subscribe(
       (newProduct: Product[]) => {
-        this.isLoading = false;
-        this.collectionSize = newProduct.length;
-        const productSet = newProduct.slice(firstProduct, lastProduct);
-        this.products = productSet;
+        this.totalAvailableProducts = newProduct.length;
+        this.fetchSuccess(firstProduct, lastProduct, newProduct);
       },
         errorMsg => {
-        this.error = errorMsg.statusText;
-        this.isLoading = false;
+          this.fetchFailure(errorMsg);
       }
     );
+
+
+    this.productChangeSubscription = this.productService.ProductChanged.subscribe(
+      (newProduct: Product[]) => {
+        this.totalAvailableProducts = newProduct.length;
+        this.fetchSuccess(firstProduct, lastProduct, newProduct);
+      },
+        errorMsg => {
+          this.fetchFailure(errorMsg);
+      }
+    );
+    
+  }
+
+
+  fetchSuccess(firstProduct, lastProduct, newProduct) {
+    this.isLoading = false;
+    this.collectionSize = newProduct.length;
+    const productSet = newProduct.slice(firstProduct, lastProduct);
+    this.products = productSet;
+  }
+
+  fetchFailure(errorMsg) {
+    this.error = errorMsg.statusText;
+    this.isLoading = false;
   }
 
   productSort(sortValue: string) {
@@ -110,6 +125,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
+    this.productFetchSubscription.unsubscribe();
+    this.productChangeSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 
