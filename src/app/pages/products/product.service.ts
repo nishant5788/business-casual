@@ -9,9 +9,6 @@ import { map, tap } from 'rxjs/operators'
   })
 export class ProductService {
 
-ProductChanged = new Subject<Product[]>();
- 
-
 constructor(private http: HttpClient) {}
 
 // private products: Product[] = [
@@ -51,6 +48,9 @@ constructor(private http: HttpClient) {}
 //            new Date()
 //          )
 //   ];
+
+
+ProductChanged = new Subject<Product[]>();
 
 private products: Product[] = [];
 

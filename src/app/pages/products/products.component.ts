@@ -16,22 +16,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = true;
   error = null;
   products: Product[];
-  totalAvailableProducts: number = 0;
+  totalAvailableProducts: number;
   private userSubscription: Subscription;
   productFetchSubscription: Subscription;
   productChangeSubscription: Subscription;
   page: any = 1;
-  pageSize: number = 2;
+  pageSize: number = 3;
   collectionSize: number;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private loginService: loginService
-    ) { 
-      
-    }
+    private loginService: loginService,
+    ) {}
 
   
     // ngAfterViewInit() {
@@ -42,8 +40,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     
 
   ngOnInit() {
-
-    
     this.userSubscription = this.loginService.user
       .subscribe(
         user => {
@@ -61,9 +57,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
   onPaginate() {
     let lastProduct = this.page * this.pageSize;
     let firstProduct = (this.page - 1) * this.pageSize;
-    if(firstProduct < 0) {
-      firstProduct = 0;
-    }
 
     // if(this.page !== 1) {
     // this.router.navigate(['/products'], {queryParams: {page: this.page}});
@@ -74,7 +67,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.productFetchSubscription = this.productService.fetchProducts().subscribe(
       (newProduct: Product[]) => {
-        this.totalAvailableProducts = newProduct.length;
         this.fetchSuccess(firstProduct, lastProduct, newProduct);
       },
         errorMsg => {
@@ -82,10 +74,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
       }
     );
 
-
     this.productChangeSubscription = this.productService.ProductChanged.subscribe(
       (newProduct: Product[]) => {
-        this.totalAvailableProducts = newProduct.length;
+
         this.fetchSuccess(firstProduct, lastProduct, newProduct);
       },
         errorMsg => {
@@ -110,12 +101,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   productSort(sortValue: string) {
     if(sortValue === 'mostRecent') {
-    this.products.sort(function(a,b): any {
-      let bDate: any = new Date(b.date);
-      let aDate: any = new Date(a.date);
-      let sortedOutput: any = bDate - aDate
-      return sortedOutput;
-    });
+      this.products.sort(function(a,b): any {
+        let bDate: any = new Date(b.date);
+        let aDate: any = new Date(a.date);
+        let sortedOutput: any = bDate - aDate
+        return sortedOutput;
+      });
+    }
+
+    if(sortValue === 'productName') {
+      this.products.sort(function(a,b) {
+        let textA = a.name.toUpperCase();
+        let textB = b.name.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
     }
   }
 
