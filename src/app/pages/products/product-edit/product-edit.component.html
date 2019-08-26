@@ -34,14 +34,20 @@
       />
       </div>
     <div class="form-group">
-    <input 
+    <!-- <input 
     type="text" 
     class="form-control" 
     placeholder="Enter Product Image URL"
     formControlName="imagePath"
-    #imagePath
-    />
-    <img width="150" [src]="imagePath.value" class="img-responsive" />
+    value="{{productImgUrl}}"
+    /> -->
+    </div>
+    <div class="form-group">
+      <input 
+      type="file"
+      (change)="selectFile($event)">
+      <button type="button" [disabled]="!selectedFiles" class="btn btn-secondary" (click)="onUploadImg()">Upload</button>
+      <div *ngIf="productImgUrl"><img  width="150"  src="{{productImgUrl}}" class="img-responsive" /></div>
     </div>
     <div class="form-group">
     <textarea 

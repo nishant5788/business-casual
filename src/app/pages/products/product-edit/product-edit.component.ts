@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../product.service';
+import { FileUpload } from '../file-upload.model';
+import { UploadFileService } from '../file-upload.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-product-edit',
@@ -13,14 +16,53 @@ export class ProductEditComponent implements OnInit {
   id: number;
   editMode = false;
   productForm: FormGroup;
+  selectedFiles: FileList;
+  currentFileUpload: FileUpload;
+  percentage: number;
+  productImgUrl: string;
 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private UploadFileService: UploadFileService
     ) { }
 
+    
+
+
+    selectFile(event) {
+      this.selectedFiles = event.target.files;
+      console.log(this.selectedFiles);
+    }
+
+    onUploadImg() {
+      const file = this.selectedFiles.item(0);
+      this.selectedFiles = undefined;
+  
+      this.currentFileUpload = new FileUpload(file);
+      this.UploadFileService.pushFileToStorage(this.currentFileUpload).subscribe(
+        percentage => {
+          this.percentage = Math.round(percentage);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
+      this.UploadFileService.productImgUrl.subscribe(
+        imgUrl => {
+         this.productImgUrl = imgUrl;
+         console.log("URL is " + this.productImgUrl);
+         this.productForm.patchValue({
+          'imagePath': imgUrl
+         });
+        }
+      );
+
+      
+    }
 
     onSubmit() {
       const newProduct = this.productForm.value;
@@ -64,12 +106,11 @@ export class ProductEditComponent implements OnInit {
     for(let tag of product.tags) {
       productTags.push(new FormControl(tag))
     }
-
     }
 
     this.productForm = new FormGroup({
       'name': new FormControl(productName, Validators.required),
-      'imagePath': new FormControl(productImagePath, Validators.required),
+      'imagePath': new FormControl(productImagePath),
       'description': new FormControl(productDescription, Validators.required),
       'date': new FormControl(productDate),
       'tags': productTags

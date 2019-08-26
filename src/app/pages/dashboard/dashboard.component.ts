@@ -13,7 +13,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     const test = this.dashboardService.pages.footer;
-    console.log("Footer text from dashboard component is " + test);
   }
 
 
