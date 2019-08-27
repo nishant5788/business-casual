@@ -14,7 +14,8 @@
         >Add New Product</button>
         <router-outlet></router-outlet>
     </div>
-    <div class="col-lg-7 d-md-flex justify-content-end align-items-center">
+    <div class="col-lg-7 product-listing-toolbar">
+      <div class="d-md-flex justify-content-end align-items-center">
     <ngb-pagination
     [(page)]="page"
     [pageSize]="pageSize"
@@ -29,6 +30,7 @@
         <button (click)="productSort('productName')" ngbDropdownItem>Product Name</button>
       </div>
     </div>
+  </div>
     </div>
     </div>
   

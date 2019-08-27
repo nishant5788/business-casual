@@ -16,8 +16,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = true;
   error = null;
   products: Product[];
-  totalAvailableProducts: number;
-  private userSubscription: Subscription;
+  productsNumber: number = 0;
+  userSubscription: Subscription;
   productFetchSubscription: Subscription;
   productChangeSubscription: Subscription;
   page: any = 1;
@@ -40,6 +40,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     
 
   ngOnInit() {
+    
     this.userSubscription = this.loginService.user
       .subscribe(
         user => {
@@ -48,6 +49,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
       );
 
       this.onPaginate();
+
   }
 
   onAddNewProduct() {
@@ -67,6 +69,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.productFetchSubscription = this.productService.fetchProducts().subscribe(
       (newProduct: Product[]) => {
+        let numberOfProducts = newProduct.length;
+        this.noProducts(numberOfProducts);
         this.fetchSuccess(firstProduct, lastProduct, newProduct);
       },
         errorMsg => {
@@ -76,7 +80,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
     this.productChangeSubscription = this.productService.ProductChanged.subscribe(
       (newProduct: Product[]) => {
-
+        let numberOfProducts = newProduct.length;
+        this.noProducts(numberOfProducts);
         this.fetchSuccess(firstProduct, lastProduct, newProduct);
       },
         errorMsg => {
@@ -118,8 +123,25 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
+  noProducts(num: number) {
+    if (num < 1) {
+    document.querySelector('.product-listing-toolbar').classList.add('d-none');
+  }
+  else {
+    document.querySelector('.product-listing-toolbar').classList.remove('d-none');
+  }
+  }
+
   availableProducts() {
     return this.products;
+  }
+
+  getTotalProductsNumber() {
+    this.productService.fetchProducts().subscribe(
+      products => {
+        return products;
+      }
+    );
   }
 
 
