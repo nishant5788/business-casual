@@ -19,7 +19,7 @@ export class ProductEditComponent implements OnInit {
   selectedFiles: FileList;
   currentFileUpload: FileUpload;
   percentage: number;
-  productImgUrl: string;
+  productImgUrl: string = "assets/img/img-not-found.jpg";
 
 
   constructor(
@@ -30,8 +30,6 @@ export class ProductEditComponent implements OnInit {
     ) { }
 
     
-
-
     selectFile(event) {
       this.selectedFiles = event.target.files;
       console.log(this.selectedFiles);
@@ -54,9 +52,9 @@ export class ProductEditComponent implements OnInit {
       this.UploadFileService.productImgUrl.subscribe(
         imgUrl => {
          this.productImgUrl = imgUrl;
-         console.log("URL is " + this.productImgUrl);
+         document.querySelector('.product-uploaded-thumb').classList.remove('d-none');
          this.productForm.patchValue({
-          'imagePath': imgUrl
+          'imagePath': this.productImgUrl
          });
         }
       );
@@ -91,7 +89,7 @@ export class ProductEditComponent implements OnInit {
   private initForm() {
 
     let productName = '';
-    let productImagePath = '';
+    let productImagePath = this.productImgUrl;
     let productDescription = '';
     let productTags = new FormArray([]);
     let productDate = new Date();
@@ -99,14 +97,28 @@ export class ProductEditComponent implements OnInit {
     if(this.editMode) {
     const product = this.productService.getProduct(this.id);
 
+    this.productImgUrl = product.imagePath;
+
     productName = product.name;
-    productImagePath = product.imagePath;
+    // productImagePath = product.imagePath;
     productDescription = product.description;
+
+    console.log(product.imagePath);
 
     for(let tag of product.tags) {
       productTags.push(new FormControl(tag))
     }
+
+    document.querySelector('.product-uploaded-thumb').classList.remove('d-none');
+    document.querySelector('.add-product-btn').classList.add('d-none');
+    
     }
+
+    else {
+      document.querySelector('.add-product-btn').classList.remove('d-none');
+    }
+
+    
 
     this.productForm = new FormGroup({
       'name': new FormControl(productName, Validators.required),
@@ -130,6 +142,7 @@ export class ProductEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['/products']);
+    document.querySelector('.add-product-btn').classList.remove('d-none');
   }
 
   onDeleteTag(index: number) {
