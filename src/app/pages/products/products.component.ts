@@ -16,7 +16,8 @@ export class ProductsComponent implements OnInit, OnDestroy {
   isLoading = true;
   error = null;
   products: Product[];
-  productsNumber: number = 0;
+  totalAvailableProducts: Product[];
+  showPagination = true;
   userSubscription: Subscription;
   productFetchSubscription: Subscription;
   productChangeSubscription: Subscription;
@@ -31,14 +32,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
     private loginService: loginService,
     ) {}
 
-  
-    // ngAfterViewInit() {
-    //   let loadedProductsPage = this.route.snapshot.queryParamMap.get('page'); 
-    //   this.page = loadedProductsPage;
-    //   console.log("loadedProductsPage is " + loadedProductsPage);
-    // }
-    
-
   ngOnInit() {
     
     this.userSubscription = this.loginService.user
@@ -48,60 +41,53 @@ export class ProductsComponent implements OnInit, OnDestroy {
         }
       );
 
-      this.onPaginate();
+      this.productFetchSubscription = this.productService.fetchProducts().subscribe(
+        (newProduct: Product[]) => {
+          this.totalAvailableProducts = newProduct;
+          this.paginatedProducts(newProduct);
+        },
+        errorMsg => {
+        this.fetchFailure(errorMsg);
+          }
+      );
 
+      this.productChangeSubscription = this.productService.ProductChanged.subscribe(
+        (newProduct: Product[]) => {
+          this.paginatedProducts(newProduct);
+        },
+        errorMsg => {
+        this.fetchFailure(errorMsg);
+          }
+
+      );
   }
 
-  onAddNewProduct() {
-    this.router.navigate(['new'], {relativeTo: this.route});
+  paginatedProducts(incomingProducts: Product[]) {
+    let start = (this.page - 1) * this.pageSize;  
+    let end = this.page * this.pageSize;
+    if(incomingProducts.length < this.pageSize + 1) {
+      this.showPagination = false;
+    }
+    else {
+      this.showPagination = true;
+    }
+    this.fetchSuccess(start, end, incomingProducts);
   }
 
   onPaginate() {
-    let lastProduct = this.page * this.pageSize;
-    let firstProduct = (this.page - 1) * this.pageSize;
-
-    // if(this.page !== 1) {
-    // this.router.navigate(['/products'], {queryParams: {page: this.page}});
-    // }
-    // else {
-    //   this.router.navigate(['/products'], {queryParams: {page: null}});
-    // }
-
-    this.productFetchSubscription = this.productService.fetchProducts().subscribe(
-      (newProduct: Product[]) => {
-        let numberOfProducts = newProduct.length;
-        this.noProducts(numberOfProducts);
-        this.fetchSuccess(firstProduct, lastProduct, newProduct);
-      },
-        errorMsg => {
-          this.fetchFailure(errorMsg);
-      }
-    );
-
-    this.productChangeSubscription = this.productService.ProductChanged.subscribe(
-      (newProduct: Product[]) => {
-        let numberOfProducts = newProduct.length;
-        this.noProducts(numberOfProducts);
-        this.fetchSuccess(firstProduct, lastProduct, newProduct);
-      },
-        errorMsg => {
-          this.fetchFailure(errorMsg);
-      }
-    );
-    
+    this.paginatedProducts(this.totalAvailableProducts);
   }
 
-
-  fetchSuccess(firstProduct, lastProduct, newProduct) {
+  fetchSuccess(start, end, incomingProducts) {
     this.isLoading = false;
-    this.collectionSize = newProduct.length;
-    const productSet = newProduct.slice(firstProduct, lastProduct);
+    this.collectionSize = incomingProducts.length;
+    let productSet = incomingProducts.slice(start, end);
     this.products = productSet;
   }
 
   fetchFailure(errorMsg) {
-    this.error = errorMsg.statusText;
     this.isLoading = false;
+    this.error = errorMsg.statusText;
   }
 
   productSort(sortValue: string) {
@@ -123,27 +109,13 @@ export class ProductsComponent implements OnInit, OnDestroy {
     }
   }
 
-  noProducts(num: number) {
-    if (num < 1) {
-    document.querySelector('.product-listing-toolbar').classList.add('d-none');
-  }
-  else {
-    document.querySelector('.product-listing-toolbar').classList.remove('d-none');
-  }
-  }
-
   availableProducts() {
     return this.products;
   }
 
-  getTotalProductsNumber() {
-    this.productService.fetchProducts().subscribe(
-      products => {
-        return products;
-      }
-    );
+  onAddNewProduct() {
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
-
 
   ngOnDestroy() {
     this.productFetchSubscription.unsubscribe();

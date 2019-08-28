@@ -14,7 +14,7 @@
         >Add New Product</button>
         <router-outlet></router-outlet>
     </div>
-    <div class="col-lg-7 product-listing-toolbar">
+    <div [ngClass]="showPagination ? 'd-block' : 'd-none'" class="col-lg-7 product-listing-toolbar">
       <div class="d-md-flex justify-content-end align-items-center">
     <ngb-pagination
     [(page)]="page"
