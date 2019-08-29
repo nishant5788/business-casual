@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './pages/login/auth.guard';
 import { ProductsResolverService } from './pages/products/products-resolver.service';
+import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent, data: { title: 'Welcome to Business Casual' }},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent, data: { title: 'Login | Business Casual' }},
   {path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard | Business Casual' }, canActivate: [AuthGuard]},
   { path: 'not-found', component: PageNotFoundComponent, data: { title: 'Page Not Found | Business Casual' } },
+  {path: 'search', component: SearchComponent, data: { title: 'Search | Business Casual' }},
     { path: '**', redirectTo: '/not-found' }
 ];
 

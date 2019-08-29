@@ -30,6 +30,15 @@
             <a class="nav-link text-uppercase text-expanded" (click)="onLogout()">Logout</a>
           </li>
       </ul>
+    
+      <div ngbDropdown class="searchbar" #searchWrapper="ngbDropdown" display="dynamic" placement="bottom-right">
+          <button class="fa fa-search searchbar-icon" ngbDropdownToggle></button>
+          <div class="searchbar-dropdown" ngbDropdownMenu>
+              <input type="text" class="form-control search-input" #inputVal placeholder="Search Products..." />
+              <button class="fa fa-search search-btn" (click)="onSearch(inputVal); searchWrapper.close();"></button>
+          </div>
+        </div>
+
     </div>
   </div>
 </nav>

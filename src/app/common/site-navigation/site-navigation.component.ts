@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { loginService } from 'src/app/pages/login/login.service';
 import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-site-navigation',
@@ -12,7 +13,11 @@ export class SiteNavigationComponent implements OnInit, OnDestroy {
   isAuthenticated = false;
   private userSubscription: Subscription;
 
-  constructor(private loginService: loginService) { }
+  constructor(
+    private loginService: loginService,
+    private router: Router,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit() {
 
@@ -22,6 +27,11 @@ export class SiteNavigationComponent implements OnInit, OnDestroy {
         this.isAuthenticated = !user? false : true;
       }
     );
+  }
+
+  onSearch(inputVal: HTMLInputElement) {
+    console.log(inputVal);
+    this.router.navigate(['/search'], {relativeTo: this.route, queryParams: { search: inputVal.value }} );
   }
 
   ngOnDestroy() {
