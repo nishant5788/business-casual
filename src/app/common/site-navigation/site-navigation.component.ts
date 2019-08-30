@@ -30,8 +30,7 @@ export class SiteNavigationComponent implements OnInit, OnDestroy {
   }
 
   onSearch(inputVal: HTMLInputElement) {
-    console.log(inputVal);
-    this.router.navigate(['/search'], {relativeTo: this.route, queryParams: { search: inputVal.value }} );
+    this.router.navigate(['/search'], {relativeTo: this.route, queryParams: { query: inputVal.value }} );
   }
 
   ngOnDestroy() {
