@@ -1,7 +1,13 @@
 .login-section {
   .section-heading-small {
-    font-size: 14px;
+    font-size: 0.8rem;
     font-weight: normal;
     text-transform: none;
+  }
+
+  .section-heading-lower {
+    @include media-breakpoint-down(sm) {
+      font-size: 2.1rem;
+    }
   }
 }

@@ -27,10 +27,15 @@ export class SiteNavigationComponent implements OnInit, OnDestroy {
         this.isAuthenticated = !user? false : true;
       }
     );
+
   }
 
   onSearch(inputVal: HTMLInputElement) {
     this.router.navigate(['/search'], {relativeTo: this.route, queryParams: { query: inputVal.value }} );
+  }
+
+  onToggleNavigation() {
+    document.getElementById("mainNavigation").classList.toggle('show');
   }
 
   ngOnDestroy() {

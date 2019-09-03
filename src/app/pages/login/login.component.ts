@@ -34,11 +34,9 @@ export class LoginComponent implements OnInit {
 
     authObs.subscribe(
       responseData => {
-        console.log(responseData);
         this.router.navigate(['/dashboard']);
       },
       errorMsg => {
-        console.log("Error MSG" + errorMsg);
         this.error = errorMsg;
       }
     );

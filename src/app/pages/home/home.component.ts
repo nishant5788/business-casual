@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
 
   products = [];
+  error: string = null;
 
   constructor(private productService: ProductService,
     private http: HttpClient
@@ -21,6 +22,9 @@ export class HomeComponent implements OnInit {
     this.productService.fetchProducts().subscribe(
         responseData => {
          this.products = responseData;
+        },
+        error => {
+          this.error = "Products are not available to display!"
         }
       );
   }

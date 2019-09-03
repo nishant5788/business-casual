@@ -4,6 +4,7 @@ import { ProductService } from './product.service';
 import { Subscription } from 'rxjs';
 import { loginService } from '../login/login.service';
 import { Product } from './product.model';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-products',
@@ -87,7 +88,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   fetchFailure(errorMsg) {
     this.isLoading = false;
-    this.error = errorMsg.statusText;
+    // this.error = errorMsg.statusText;
+    this.error = "Products are not available at the moment. Please check your connectivity!"
+    this.showPagination = false;
   }
 
   productSort(sortValue: string) {
