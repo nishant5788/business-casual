@@ -61,6 +61,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
           }
 
       );
+
   }
 
   paginatedProducts(incomingProducts: Product[]) {
@@ -77,6 +78,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onPaginate() {
     this.paginatedProducts(this.totalAvailableProducts);
+    console.log("size is " + this.totalAvailableProducts.length);
   }
 
   fetchSuccess(start, end, incomingProducts) {
@@ -84,12 +86,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.collectionSize = incomingProducts.length;
     let productSet = incomingProducts.slice(start, end);
     this.products = productSet;
+
+    if(incomingProducts.length < 1) {
+    this.error = "No Products Available!";
+    }
   }
 
   fetchFailure(errorMsg) {
     this.isLoading = false;
-    // this.error = errorMsg.statusText;
-    this.error = "Products are not available at the moment. Please check your connectivity!"
+    //  this.error = errorMsg.statusText;
     this.showPagination = false;
   }
 

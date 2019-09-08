@@ -33,6 +33,7 @@ export class ProductEditComponent implements OnInit {
     selectFile(event) {
       this.selectedFiles = event.target.files;
       console.log(this.selectedFiles);
+      this.onUploadImg();
     }
 
     onUploadImg() {
@@ -43,6 +44,9 @@ export class ProductEditComponent implements OnInit {
       this.UploadFileService.pushFileToStorage(this.currentFileUpload).subscribe(
         percentage => {
           this.percentage = Math.round(percentage);
+          (<HTMLElement>document.querySelector('.product-thumb-progress')).classList.remove('d-none');
+          (<HTMLElement>document.querySelector('.product-thumb-progress .progress-bar')).style.width = this.percentage + "%";
+
         },
         error => {
           console.log(error);

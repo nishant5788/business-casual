@@ -20,7 +20,7 @@ export class ProductSearchComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-//     this.products = this.productService.getProducts();
+
     this.productService.fetchProducts()
     .subscribe(
       res => {
@@ -35,6 +35,10 @@ export class ProductSearchComponent implements OnInit {
 
     if (current.name.match(queryPattern) && queryVal) {
       searchHolder.push(current);
+    }
+
+    if(queryVal === '') {
+      searchHolder = res;
     }
 
 });
