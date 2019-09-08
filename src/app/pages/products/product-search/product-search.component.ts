@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../product.model';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductService } from '../products/product.service';
-import { Product } from '../products/product.model';
+import { ProductService } from '../product.service';
+
 
 @Component({
-
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
-
+  selector: 'app-product-search',
+  templateUrl: './product-search.component.html',
+  styleUrls: ['./product-search.component.scss']
 })
-
-export class SearchComponent implements OnInit {
+export class ProductSearchComponent implements OnInit {
 
   products: Product[]
   searchResults: Product[] = [];
@@ -22,11 +20,13 @@ export class SearchComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.products = this.productService.getProducts();
-    this.route.queryParams.
-
+//     this.products = this.productService.getProducts();
+    this.productService.fetchProducts()
+    .subscribe(
+      res => {
+        this.products = res;
+        this.route.queryParams.
     subscribe(
-
       (params: Params)=> {
         let queryVal = params['query'];
         let searchHolder = [];
@@ -38,11 +38,16 @@ export class SearchComponent implements OnInit {
     }
 
 });
-
 this.searchResults = searchHolder;
-
       }
-
     );
+      }
+    );
+
+
+
+
+    
   }
+
 }
