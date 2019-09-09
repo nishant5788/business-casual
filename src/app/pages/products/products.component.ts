@@ -78,7 +78,6 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   onPaginate() {
     this.paginatedProducts(this.totalAvailableProducts);
-    console.log("size is " + this.totalAvailableProducts.length);
   }
 
   fetchSuccess(start, end, incomingProducts) {
