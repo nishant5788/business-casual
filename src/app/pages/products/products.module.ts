@@ -1,12 +1,7 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from '@angular/fire/storage';
 import { CommonModule } from '@angular/common';
-
 import { ProductsComponent } from './products.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -27,8 +22,8 @@ import { ProductFilter } from './product-filter.pipe';
         ProductListComponent,
         ProductSingleComponent, 
         LoaderComponent,
-        ShortenPipe,
-        ProductFilter
+        ProductFilter,
+        ShortenPipe
     ],
     imports: [
         RouterModule,
@@ -36,9 +31,6 @@ import { ProductFilter } from './product-filter.pipe';
         ReactiveFormsModule,
         ProductsRoutingModule,
         NgbModule,
-        AngularFireModule.initializeApp(environment.firebase),
-        AngularFireDatabaseModule,
-        AngularFireStorageModule,
       ],
     exports: [
         ProductsComponent,

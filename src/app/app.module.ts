@@ -17,7 +17,10 @@ import { ModalComponent } from './common/modal/modal.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProductSearchComponent } from './pages/products/product-search/product-search.component';
-import { ProductsModule } from './pages/products/products.module';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 
 @NgModule({
@@ -33,16 +36,17 @@ import { ProductsModule } from './pages/products/products.module';
     ModalComponent,
     LoginComponent,
     DashboardComponent,
-    ProductSearchComponent
+    ProductSearchComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ProductsModule,
     AppRoutingModule,
-    
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
   ],
   entryComponents: [
     ModalComponent

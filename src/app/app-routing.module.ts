@@ -17,7 +17,7 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent, data: { title: 'Dashboard | Business Casual' }, canActivate: [AuthGuard]},
   {path: 'not-found', component: PageNotFoundComponent, data: { title: 'Page Not Found | Business Casual' } },
   {path: 'search', component: ProductSearchComponent, data: { title: 'Search | Business Casual' }},
-  // {path: 'products', loadChildren: './pages/products/products.module#ProductsModule'},
+  {path: 'products', loadChildren: './pages/products/products.module#ProductsModule'},
   { path: '**', redirectTo: '/not-found' }
 ];
 

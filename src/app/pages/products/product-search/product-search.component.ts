@@ -47,11 +47,6 @@ this.searchResults = searchHolder;
     );
       }
     );
-
-
-
-
-    
   }
 
 }
