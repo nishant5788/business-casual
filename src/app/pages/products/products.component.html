@@ -15,7 +15,7 @@
         <router-outlet></router-outlet>
     </div>
     <div [ngClass]="showPagination ? 'd-block' : 'd-none'" class="col-lg-7 product-listing-toolbar">
-      <div class="d-md-flex justify-content-end align-items-center">
+      <div class="d-flex justify-content-md-end justify-content-between align-items-center">
     <ngb-pagination
     [(page)]="page"
     [pageSize]="pageSize"

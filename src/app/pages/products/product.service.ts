@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, tap } from 'rxjs/operators'
+import {environment } from '../../../environments/environment';
 
 @Injectable({
      providedIn: 'root' 
@@ -70,13 +71,13 @@ storeProducts() {
            current.id = index;
           });
 
-     this.http.put('https://businesscasual-2d842.firebaseio.com/products.json', products).subscribe();
+     this.http.put(environment.firebase.databaseURL + '/products.json', products).subscribe();
      }
 
 
      fetchProducts() {
           return this.http
-          .get<Product[]>('https://businesscasual-2d842.firebaseio.com/products.json')
+          .get<Product[]>(environment.firebase.databaseURL + '/products.json')
           .pipe(
                map(products => {
                return products.map((product) => {

@@ -6,10 +6,10 @@
   <div class="container">
 
     <div ngbDropdown class="searchbar order-lg-1" #searchWrapper="ngbDropdown" display="dynamic">
-      <button class="fa fa-search searchbar-icon" ngbDropdownToggle></button>
+      <button class="search-icon icon-block searchbar-icon" ngbDropdownToggle></button>
       <div class="searchbar-dropdown" ngbDropdownMenu>
           <input type="text" class="form-control search-input" #inputVal placeholder="Search Products..." />
-          <button class="fa fa-search search-btn" (click)="onSearch(inputVal); searchWrapper.close();"></button>
+          <button class="search-icon icon-block is-dark search-btn" (click)="onSearch(inputVal); searchWrapper.close();"></button>
       </div>
     </div>
 
