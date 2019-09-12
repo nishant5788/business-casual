@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DashboardService } from './dashboard.service';
+import { DashboardPages } from './pages.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,17 +10,23 @@ import { DashboardService } from './dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
+  headerText: string;
+  footerText: string;
+
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
-    const test = this.dashboardService.pages.footer;
+    this.dashboardService.getPages().subscribe(
+      (pages: DashboardPages) => {
+        this.headerText = pages.newHeader;
+        this.footerText = pages.newFooter;
+      }
+    );
   }
 
-
-  onEditFooter(form: NgForm) {
-    const value = form.value.editfooter;
-    this.dashboardService.updateFooter(value);
-    this.dashboardService.storePages();
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    this.dashboardService.updateAllPages(value);
   }
 
 }

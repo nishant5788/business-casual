@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FooterComponent implements OnInit {
 
-  footerText = 'Copyright & Your Website 2018';
+  footerText: string;
 
   constructor(private dashboardService: DashboardService,
     private http: HttpClient
@@ -17,11 +17,21 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.dashboardService.pagesChanged.subscribe(
+      (resData) => {
+        this.updatingFooter(resData, 'newFooter');
+      }
+    );
+
+    this.dashboardService.getPages().subscribe(
       resData => {
-        console.log("restData is " + resData);
+        this.updatingFooter(resData, 'newFooter');
       }
     );
     
+  }
+
+  updatingFooter(receivingData: {}, target: string) {
+    this.footerText = receivingData[target];
   }
 
 }

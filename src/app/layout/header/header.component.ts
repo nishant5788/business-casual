@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { loginService } from 'src/app/pages/login/login.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DashboardService } from 'src/app/pages/dashboard/dashboard.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +12,16 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
+  headerText: string = "Business Casual";
   isAuthenticated = false;
   private userSubscription: Subscription;
 
   constructor(
     private loginService: loginService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dashboardService: DashboardService,
+    private http: HttpClient
     ) { }
 
   ngOnInit() {
@@ -28,6 +33,23 @@ export class HeaderComponent implements OnInit {
       }
     );
 
+
+        this.dashboardService.pagesChanged.subscribe(
+      (resData) => {
+        this.updatingHeader(resData, 'newHeader');
+      }
+    );
+
+    this.dashboardService.getPages().subscribe(
+      resData => {
+        this.updatingHeader(resData, 'newHeader');
+      }
+    );
+
+  }
+
+    updatingHeader(receivingData: {}, target: string) {
+    this.headerText = receivingData[target];
   }
 
   onSearch(inputVal: HTMLInputElement) {
@@ -47,3 +69,31 @@ export class HeaderComponent implements OnInit {
   }
 
 }
+
+
+
+
+// footerText: string;
+
+//   constructor(private dashboardService: DashboardService,
+//     private http: HttpClient
+//     ) { }
+
+//   ngOnInit() {
+//     this.dashboardService.pagesChanged.subscribe(
+//       (resData) => {
+//         this.updatingFooter(resData, 'newFooter');
+//       }
+//     );
+
+//     this.dashboardService.getPages().subscribe(
+//       resData => {
+//         this.updatingFooter(resData, 'newFooter');
+//       }
+//     );
+    
+//   }
+
+//   updatingFooter(receivingData: {}, target: string) {
+//     this.footerText = receivingData[target];
+//   }

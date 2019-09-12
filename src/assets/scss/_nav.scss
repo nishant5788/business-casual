@@ -1,0 +1,7 @@
+.nav-pills .nav-link {
+    color: $secondary;
+    &.active {
+        background-color: $primary;
+        color: #fff;
+    }
+}

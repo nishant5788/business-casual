@@ -8,8 +8,44 @@
                 <span class="section-heading-upper">Dashboard</span>
                 <span class="section-heading-lower">Edit Fields Below</span>
               </h2>
+
+
+              <!-- Pages Form -->
+              <form 
+              class="form" 
+              (ngSubmit)="onSubmit(editPages)"
+              #editPages="ngForm"
+              >
+              <div class="form-group">
+              <label for="newHeader">Update Header</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              id="newHeader"
+              name="newHeader"
+              ngModel
+              [(ngModel)]="headerText"
+              />
+              </div>
+              <div class="form-group">
+                <label for="newFooter">Update Footer</label>
+                <input 
+                type="text" 
+                class="form-control"
+                id="newFooter"
+                name="newFooter"
+                ngModel
+                [(ngModel)]="footerText"
+                />
+                </div>
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+              <!-- Pages Form -->
               
               <!-- Tabs -->
+              <ng-container *ngIf="false">
               <ngb-tabset type="pills">
 
                 <!-- Header Tab -->
@@ -19,7 +55,6 @@
                     </ng-template>
                   </ngb-tab>
                   <!-- Header Tab -->
-
 
                   <!-- Footer Tab -->
                   <ngb-tab title="Footer">
@@ -49,6 +84,7 @@
 
 
                 </ngb-tabset>
+              </ng-container>
               <!-- Tabs -->
   
   
