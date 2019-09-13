@@ -104,7 +104,6 @@ export class ProductEditComponent implements OnInit {
     this.productImgUrl = product.imagePath;
 
     productName = product.name;
-    // productImagePath = product.imagePath;
     productDescription = product.description;
 
     console.log(product.imagePath);

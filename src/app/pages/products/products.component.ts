@@ -89,11 +89,15 @@ export class ProductsComponent implements OnInit, OnDestroy {
     if(incomingProducts.length < 1) {
     this.error = "No Products Available!";
     }
+    else {
+      this.error = null;
+    }
   }
 
   fetchFailure(errorMsg) {
     this.isLoading = false;
-    //  this.error = errorMsg.statusText;
+    // this.error = errorMsg;
+    this.error = "No Products Available!"
     this.showPagination = false;
   }
 
