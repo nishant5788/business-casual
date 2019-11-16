@@ -16,16 +16,17 @@ export class DashboardService {
         newAbout: 'About Page Content',
         newStore: 'store Page Content',
         newHeader: 'Header Text',
-        newFooter: 'footer Text'
+        newFooter: 'footer Text',
+        productsToShow: 3
     };
 
     constructor(private http: HttpClient) {}
 
-    updatePages(target: string, footerText: string) {
-        this.pages[target] = footerText;
-        this.http.put(environment.firebase.databaseURL + '/pages.json', this.pages).subscribe();
-        this.pagesChanged.next(this.pages);
-    }
+    // updatePages(target: string, footerText: string) {
+    //     this.pages[target] = footerText;
+    //     this.http.put(environment.firebase.databaseURL + '/pages.json', this.pages).subscribe();
+    //     this.pagesChanged.next(this.pages);
+    // }
 
     updateAllPages(newContent: DashboardPages) {
         this.pages = newContent;

@@ -10,16 +10,23 @@ import { DashboardPages } from './pages.model';
 })
 export class DashboardComponent implements OnInit {
 
-  headerText: string;
-  footerText: string;
+  Dashboardpages: DashboardPages = {
+    newHome: '',
+    newAbout: '',
+    newStore: '',
+    newHeader: '',
+    newFooter: '',
+    productsToShow: 0
+};
 
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit() {
     this.dashboardService.getPages().subscribe(
       (pages: DashboardPages) => {
-        this.headerText = pages.newHeader;
-        this.footerText = pages.newFooter;
+        this.Dashboardpages.newHeader = pages.newHeader;
+        this.Dashboardpages.newFooter = pages.newFooter;
+        this.Dashboardpages.productsToShow = pages.productsToShow;
       }
     );
   }

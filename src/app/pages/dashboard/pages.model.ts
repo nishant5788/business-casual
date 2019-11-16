@@ -6,5 +6,7 @@ export class DashboardPages {
         public newStore: string,
         public newHeader: string,
         public newFooter: string,
+        public productsToShow: number
         ) {}
+        
 }
