@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StoreComponent implements OnInit {
 
+  storeMainHeading: string = "Come On In";
+  storeTagline: string = "We're Open";
+
   storeTime = [
     {day: 'Sunday', time: 'Closed'},
     {day: 'Monday', time: '7:00 AM to 8:00 PM'},
@@ -22,12 +25,27 @@ export class StoreComponent implements OnInit {
   ngOnInit() {}
 
   addToday(index: number) {
-    const today = new Date().getDay();
+    let today = new Date().getDay();
+    let currentHour = new Date().getHours();
+
+    if(currentHour > 19 || currentHour < 7 || today === 0) {
+      this.storeClosed();
+    }
+
+    if(today === 6 && currentHour > 17 || currentHour < 9) {
+      this.storeClosed();
+    }
+
     if (index === today) {
       return 'today';
     } else {
       return false;
     }
+  }
+
+  storeClosed() {
+    this.storeMainHeading = "Sorry";
+    this.storeTagline = "We're Closed";
   }
 
 }
